@@ -1,0 +1,45 @@
+{
+	"AWSTemplateFormatVersion":  "2010-09-09",
+	"Description" : "My Sample CF VPC",
+	"Resources" :
+	{
+		"MyCFVPC":
+		{
+			"Type" : "AWS::EC2::VPC",
+			"Properties":
+			{
+				"CidrBlock" : "172.172.0.0/16",
+				"InstanceTenancy": "default",
+				"Tags":[  
+				{ 
+					"Key": "Name",
+					"Value": "MyCFVPC"
+				}
+				 ]
+			}
+		},
+		"MyPrivSubnetVPC":
+		{
+			"Type": "AWS::EC2::Subnet",
+			"Properties":
+			{
+				"CidrBlock": "172.172.10.0/24",
+				"VpcId": { "Ref" : "MyCFVPC"},
+				"Tags": [
+				{
+					"Key": "Name",
+					"Value": "MyPrivSubnetVPC"
+					}]
+			}
+		},
+		"MyRTPrivSub":
+		{
+			"Type": "AWS::EC2::RouteTable",
+			"Properties":
+			{
+				"VpcId" : {"Ref" : "MyCFVPC"},
+				"Tags":[{"Key":"Name", "Value":"MyRTPrivSub"}]
+			}
+		}
+	}
+}

@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A sample template
+Resources:
+  MyEC2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties: 
+      ImageId: "ami-2f726546"
+      InstanceType: t2.micro
+      KeyName: gjaws
+      BlockDeviceMappings:
+          -
+              DeviceName: /dev/sdm
+              Ebs:
+              VolumeType: gp2
+              DeleteOnTermination: false
+              VolumeSize: 8
